@@ -6,6 +6,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
 
 # Set up OpenAI API credentials
 #openai.api_key = st.text_input("Enter your OpenAI API key", type="password")
@@ -54,7 +62,7 @@ def main():
                     st.write(test_steps)
 
                     # Execute the test steps using Selenium
-                    driver = webdriver.Chrome()
+                    driver = webdriver.Chrome(options=chrome_options)
                     current_url = st.session_state.web_url
                     driver.get(current_url)
                     screenshot_counter = 1
